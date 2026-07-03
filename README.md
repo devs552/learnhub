@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # LearnHub - Web Development Learning Platform
 
 A comprehensive interactive learning platform for mastering HTML, CSS, JavaScript, and React with hands-on exercises, certificates, and beautiful animations.
@@ -201,3 +202,7 @@ For issues or questions, please open an issue on GitHub.
 ---
 
 **Happy Learning! Master web development with LearnHub.**
+=======
+# learnhub
+course app for student
+>>>>>>> 23c7fc35caea0efee20f3ec00423af268eb42860
