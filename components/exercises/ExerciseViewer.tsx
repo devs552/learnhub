@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -21,7 +21,7 @@ interface ExerciseScore {
   completedAt: string
 }
 
-export default function ExerciseViewer() {
+function ExerciseViewerContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const courseId = searchParams.get('courseId')
@@ -261,6 +261,23 @@ export default function ExerciseViewer() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function ExerciseViewer() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-background">
+          <div className="text-center">
+            <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-foreground/60">Loading exercises...</p>
+          </div>
+        </div>
+      }
+    >
+      <ExerciseViewerContent />
+    </Suspense>
   )
 }
 
