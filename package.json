@@ -1,0 +1,53 @@
+{
+  "name": "my-project",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@babel/standalone": "^7.29.7",
+    "@base-ui/react": "^1.5.0",
+    "@monaco-editor/react": "^4.7.0",
+    "@types/nodemailer": "^8.0.1",
+    "@vercel/analytics": "1.6.1",
+    "axios": "^1.18.1",
+    "babel": "^5.8.38",
+    "bcryptjs": "^3.0.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "dotenv": "^17.4.2",
+    "framer-motion": "^12.42.2",
+    "html2canvas-pro": "^2.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "jspdf": "^4.2.1",
+    "lucide-react": "^1.16.0",
+    "monaco-editor": "^0.55.1",
+    "mongoose": "^9.7.3",
+    "next": "16.2.6",
+    "nodemailer": "^9.0.3",
+    "react": "^19",
+    "react-dom": "^19",
+    "shadcn": "^4.8.0",
+    "tailwind-merge": "^3.3.1",
+    "tw-animate-css": "^1.4.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.2",
+    "@types/babel__standalone": "^7.1.9",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "postcss": "^8.5.16",
+    "tailwindcss": "^4.3.2",
+    "typescript": "5.7.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "hono": "4.12.25"
+    }
+  }
+}
