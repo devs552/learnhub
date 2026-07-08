@@ -259,31 +259,32 @@ export default function AdminDashboard() {
    <AdminContentPage />
         {/* Filter and Students Table */}
         <div className="bg-card rounded-lg border border-primary/50 p-8 glow-border-cyan">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl font-bold text-foreground">Students</h2>
-            <div className="flex gap-4">
-              <button
-                onClick={() => setFilter('all')}
-                className={`px-4 py-2 rounded-lg font-semibold transition ${
-                  filter === 'all'
-                    ? 'bg-primary text-background glow-border-cyan'
-                    : 'border border-primary/50 text-primary hover:bg-primary/10'
-                }`}
-              >
-                All ({data?.students.length || 0})
-              </button>
-              <button
-                onClick={() => setFilter('certificates')}
-                className={`px-4 py-2 rounded-lg font-semibold transition ${
-                  filter === 'certificates'
-                    ? 'bg-primary text-background glow-border-cyan'
-                    : 'border border-primary/50 text-primary hover:bg-primary/10'
-                }`}
-              >
-                Downloaded Cert. ({data?.students.filter((s) => s.certificatesDownloaded > 0).length || 0})
-              </button>
-            </div>
-          </div>
+     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">
+  <h2 className="text-2xl font-bold text-foreground">Students</h2>
+
+  <div className="flex flex-wrap gap-3 sm:gap-4">
+    <button
+      onClick={() => setFilter('all')}
+      className={`px-4 py-2 rounded-lg font-semibold transition text-sm sm:text-base whitespace-nowrap ${
+        filter === 'all'
+          ? 'bg-primary text-background glow-border-cyan'
+          : 'border border-primary/50 text-primary hover:bg-primary/10'
+      }`}
+    >
+      All ({data?.students.length || 0})
+    </button>
+    <button
+      onClick={() => setFilter('certificates')}
+      className={`px-4 py-2 rounded-lg font-semibold transition text-sm sm:text-base whitespace-nowrap ${
+        filter === 'certificates'
+          ? 'bg-primary text-background glow-border-cyan'
+          : 'border border-primary/50 text-primary hover:bg-primary/10'
+      }`}
+    >
+      Downloaded Cert. ({data?.students.filter((s) => s.certificatesDownloaded > 0).length || 0})
+    </button>
+  </div>
+</div>
 
           <div className="overflow-x-auto">
             <table className="w-full">

@@ -89,7 +89,7 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background">
       {/* Navigation */}
       <nav className="bg-card border-b border-primary/30">
-        <div className="max-w-6xl mx-auto px-8 py-6 flex justify-between items-center">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex flex-wrap justify-between items-center gap-4">
           <h1 className="text-2xl font-bold text-primary neon-glow-cyan">LearnHub</h1>
           <div className="flex items-center gap-4">
             <span className="text-foreground/70">Welcome, {user?.name}!</span>

@@ -92,10 +92,10 @@ function ExerciseViewerContent() {
 
   if (loading || redirecting) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className="min-h-screen flex items-center justify-center bg-background px-4">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-foreground/60">{redirecting ? 'Lesson already completed, redirecting...' : 'Loading exercises...'}</p>
+          <div className="w-12 h-12 sm:w-16 sm:h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-sm sm:text-base text-foreground/60">{redirecting ? 'Lesson already completed, redirecting...' : 'Loading exercises...'}</p>
         </div>
       </div>
     )
@@ -103,9 +103,9 @@ function ExerciseViewerContent() {
 
   if (exercises.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className="min-h-screen flex items-center justify-center bg-background px-4">
         <div className="text-center">
-          <p className="text-foreground/60 mb-4">No exercises available</p>
+          <p className="text-sm sm:text-base text-foreground/60 mb-4">No exercises available</p>
           <Link href={`/courses/${courseId}`} className="text-primary hover:underline">
             Back to Course
           </Link>
@@ -119,15 +119,15 @@ function ExerciseViewerContent() {
     return (
       <div className="min-h-screen bg-background">
         <nav className="bg-card border-b border-primary/30 sticky top-0 z-10">
-          <div className="max-w-4xl mx-auto px-8 py-4 flex justify-between items-center">
-            <Link href={`/courses/${courseId}`} className="text-primary hover:underline">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex flex-wrap gap-2 justify-between items-center">
+            <Link href={`/courses/${courseId}`} className="text-sm sm:text-base text-primary hover:underline">
               Back to Course
             </Link>
-            <span className="text-foreground/70 font-semibold">Lesson Review</span>
+            <span className="text-sm sm:text-base text-foreground/70 font-semibold">Lesson Review</span>
           </div>
         </nav>
 
-        <div className="max-w-4xl mx-auto px-8 py-12 space-y-6">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-4 sm:space-y-6">
           {exercises.map((exercise, index) => (
             <ReviewCard
               key={exercise._id}
@@ -188,11 +188,11 @@ function ExerciseViewerContent() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <nav className="bg-card border-b border-primary/30 sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-8 py-4 flex justify-between items-center">
-          <Link href={`/courses/${courseId}`} className="text-primary hover:underline">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex flex-wrap gap-2 justify-between items-center">
+          <Link href={`/courses/${courseId}`} className="text-sm sm:text-base text-primary hover:underline">
             Back to Course
           </Link>
-          <span className="text-foreground/70 font-semibold">
+          <span className="text-xs sm:text-sm text-foreground/70 font-semibold whitespace-nowrap">
             Exercise {currentIndex + 1} of {exercises.length}
           </span>
         </div>
@@ -209,13 +209,13 @@ function ExerciseViewerContent() {
       </nav>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-8 py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <motion.div
           key={currentExercise._id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-card border border-primary/30 rounded-xl p-8"
+          className="bg-card border border-primary/30 rounded-xl p-4 sm:p-6 lg:p-8"
         >
           {currentExercise.content.type === 'multiple-choice' ? (
             <MultipleChoice
@@ -247,13 +247,13 @@ function ExerciseViewerContent() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5 }}
-            className="mt-8 bg-accent/10 border border-accent/40 rounded-lg p-8 text-center"
+            className="mt-6 sm:mt-8 bg-accent/10 border border-accent/40 rounded-lg p-6 sm:p-8 text-center"
           >
-            <p className="text-2xl font-bold text-accent mb-2">🎉 Excellent!</p>
-            <p className="text-foreground/70 mb-6">You&apos;ve completed all exercises for this lesson.</p>
+            <p className="text-xl sm:text-2xl font-bold text-accent mb-2">🎉 Excellent!</p>
+            <p className="text-sm sm:text-base text-foreground/70 mb-6">You&apos;ve completed all exercises for this lesson.</p>
             <Link
               href={`/courses/${courseId}`}
-              className="inline-block px-8 py-3 bg-accent text-accent-foreground rounded-lg hover:opacity-90 transition font-semibold"
+              className="inline-block w-full sm:w-auto px-8 py-3 bg-accent text-accent-foreground rounded-lg hover:opacity-90 transition font-semibold"
             >
               Back to Course
             </Link>
@@ -268,10 +268,10 @@ export default function ExerciseViewer() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="min-h-screen flex items-center justify-center bg-background px-4">
           <div className="text-center">
-            <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-foreground/60">Loading exercises...</p>
+            <div className="w-12 h-12 sm:w-16 sm:h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-sm sm:text-base text-foreground/60">Loading exercises...</p>
           </div>
         </div>
       }
@@ -301,13 +301,13 @@ function ReviewCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="bg-card border border-primary/30 rounded-xl p-6"
+      className="bg-card border border-primary/30 rounded-xl p-4 sm:p-6"
     >
-      <div className="flex items-start justify-between mb-4">
-        <span className="text-sm font-semibold text-foreground/40">Exercise {index + 1}</span>
+      <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
+        <span className="text-xs sm:text-sm font-semibold text-foreground/40">Exercise {index + 1}</span>
         {score !== undefined && (
           <span
-            className={`text-sm font-bold px-3 py-1 rounded-full border ${
+            className={`text-xs sm:text-sm font-bold px-3 py-1 rounded-full border ${
               score.score >= 80
                 ? 'bg-accent/10 text-accent border-accent/40'
                 : 'bg-secondary/10 text-secondary border-secondary/40'
@@ -320,7 +320,7 @@ function ReviewCard({
 
       {isMultipleChoice ? (
         <div>
-          <h3 className="text-lg font-bold text-foreground mb-4">{exercise.content.question}</h3>
+          <h3 className="text-base sm:text-lg font-bold text-foreground mb-4">{exercise.content.question}</h3>
           <div className="space-y-2 mb-4">
             {exercise.content.options.map((option: string, i: number) => (
               <div
@@ -333,9 +333,9 @@ function ReviewCard({
               >
                 <div className="flex items-center gap-2">
                   {i === exercise.content.correctAnswerIndex && (
-                    <span className="text-accent font-bold">✓</span>
+                    <span className="text-accent font-bold flex-shrink-0">✓</span>
                   )}
-                  <span className={i === exercise.content.correctAnswerIndex ? 'font-semibold text-accent' : 'text-foreground/70'}>
+                  <span className={`text-sm sm:text-base ${i === exercise.content.correctAnswerIndex ? 'font-semibold text-accent' : 'text-foreground/70'}`}>
                     {option}
                   </span>
                 </div>
@@ -343,17 +343,17 @@ function ReviewCard({
             ))}
           </div>
           {exercise.content.explanation && (
-            <p className="text-sm text-foreground/70 bg-primary/5 border border-primary/20 rounded-lg p-3">
+            <p className="text-xs sm:text-sm text-foreground/70 bg-primary/5 border border-primary/20 rounded-lg p-3">
               {exercise.content.explanation}
             </p>
           )}
         </div>
       ) : (
         <div>
-          <h3 className="text-lg font-bold text-foreground mb-2">{exercise.content.title}</h3>
-          <p className="text-foreground/70 mb-4 whitespace-pre-wrap">{exercise.content.description}</p>
-          <p className="text-sm font-semibold text-foreground/80 mb-2">Correct solution:</p>
-          <pre className="bg-background border border-primary/20 text-accent text-sm p-4 rounded-lg overflow-x-auto">
+          <h3 className="text-base sm:text-lg font-bold text-foreground mb-2">{exercise.content.title}</h3>
+          <p className="text-sm sm:text-base text-foreground/70 mb-4 whitespace-pre-wrap">{exercise.content.description}</p>
+          <p className="text-xs sm:text-sm font-semibold text-foreground/80 mb-2">Correct solution:</p>
+          <pre className="bg-background border border-primary/20 text-accent text-xs sm:text-sm p-3 sm:p-4 rounded-lg overflow-x-auto">
             <code>{exercise.content.solution}</code>
           </pre>
         </div>

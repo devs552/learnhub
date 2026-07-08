@@ -131,9 +131,9 @@ export default function AdminContentPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="bg-card border-b border-primary/50 sticky top-0 z-40">
-        <div className="max-w-6xl mx-auto px-8 py-6 flex justify-between items-center">
+    <div className=" bg-card height-[contained] bg-background mb-8">
+      <div className="bg-card    border-primary/50 sticky top-0 z-40">
+        <div className="max-w-6xl mx-auto px-8 py-6 flex justify-between items-center ">
           <h1 className="text-3xl font-bold text-primary neon-glow-cyan">Manage Content</h1>
           <button
             onClick={() => {
@@ -147,11 +147,11 @@ export default function AdminContentPage() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-8 py-12 space-y-6">
+      <div className="max-w-6xl mx-auto mt-4 md:px-8 md:py-12 sm:px-4 sm:py-8 space-y-6">
         {courses.map((course) => (
-          <div key={course._id} className="bg-card border border-primary/30 rounded-lg overflow-hidden">
+          <div key={course._id} className="bg-card  border border-primary/30 rounded-lg overflow-hidden">
             {/* Course header */}
-            <div className="p-6 flex items-center justify-between">
+            <div className="p-6  flex items-center justify-between">
               <button
                 onClick={() => setExpandedCourse(expandedCourse === course._id ? null : course._id)}
                 className="flex items-center gap-4 text-left flex-1"

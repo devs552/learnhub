@@ -79,10 +79,10 @@ export default function CourseDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className="min-h-screen flex items-center justify-center bg-background px-4">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-foreground/60">Loading course...</p>
+          <div className="w-12 h-12 sm:w-16 sm:h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-sm sm:text-base text-foreground/60">Loading course...</p>
         </div>
       </div>
     )
@@ -90,9 +90,9 @@ export default function CourseDetail() {
 
   if (!course) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className="min-h-screen flex items-center justify-center bg-background px-4">
         <div className="text-center">
-          <p className="text-foreground/60 mb-4">Course not found</p>
+          <p className="text-sm sm:text-base text-foreground/60 mb-4">Course not found</p>
           <Link href="/dashboard" className="text-primary hover:underline">
             Back to Dashboard
           </Link>
@@ -151,25 +151,25 @@ export default function CourseDetail() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <nav className="bg-card border-b border-primary/30 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-4">
-            <Link href="/dashboard" className="text-primary hover:underline">
-              Back to Dashboard
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex flex-wrap gap-3 justify-between items-center">
+          <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+            <Link href="/dashboard" className="text-sm sm:text-base text-primary hover:underline whitespace-nowrap">
+              Back
             </Link>
-            <span className="text-foreground/30">|</span>
-            <span className="text-2xl">{course.icon}</span>
-            <h1 className="text-2xl font-bold text-foreground">{course.title}</h1>
+            <span className="text-foreground/30 hidden sm:inline">|</span>
+            <span className="text-xl sm:text-2xl flex-shrink-0">{course.icon}</span>
+            <h1 className="text-base sm:text-2xl font-bold text-foreground truncate">{course.title}</h1>
           </div>
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="md:hidden px-4 py-2 bg-primary text-primary-foreground rounded-lg"
+            className="md:hidden px-3 py-2 text-sm bg-primary text-primary-foreground rounded-lg flex-shrink-0"
           >
             {sidebarOpen ? 'Hide' : 'Show'} Lessons
           </button>
         </div>
       </nav>
 
-      <div className="max-w-7xl mx-auto flex gap-8 p-8">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-4 sm:gap-6 lg:gap-8 p-4 sm:p-6 lg:p-8">
         {/* Sidebar */}
         <motion.div
           initial={{ x: -300, opacity: 0 }}
@@ -177,17 +177,17 @@ export default function CourseDetail() {
           transition={{ duration: 0.5 }}
           className={`${sidebarOpen ? 'block' : 'hidden'} md:block w-full md:w-80 flex-shrink-0`}
         >
-          <div className="bg-card border border-primary/30 rounded-xl p-6">
-            <h2 className="text-xl font-bold text-foreground mb-6">Lessons</h2>
+          <div className="bg-card border border-primary/30 rounded-xl p-4 sm:p-6">
+            <h2 className="text-lg sm:text-xl font-bold text-foreground mb-4 sm:mb-6">Lessons</h2>
             <div className="space-y-2">
               {lessonAccess.map(({ lesson, isCompleted, unlocked }, index) => (
                 <motion.button
                   key={lesson._id}
                   onClick={() => handleSelectLesson(lesson)}
                   disabled={!unlocked}
-                  whileHover={{ scale: unlocked ? 1.02 : 1 }}
+                  whileHover={{ scale: unlocked ? 1.01 : 1 }}
                   whileTap={{ scale: unlocked ? 0.98 : 1 }}
-                  className={`w-full text-left px-4 py-3 rounded-lg transition border ${
+                  className={`w-full text-left px-3 sm:px-4 py-3 rounded-lg transition border ${
                     !unlocked
                       ? 'bg-background border-primary/10 text-foreground/30 cursor-not-allowed'
                       : selectedLesson?._id === lesson._id
@@ -198,12 +198,12 @@ export default function CourseDetail() {
                   }`}
                 >
                   <div className="flex items-start gap-3">
-                    <span className="font-bold text-sm">
+                    <span className="font-bold text-sm flex-shrink-0">
                       {isCompleted ? '✓' : !unlocked ? '🔒' : index + 1}
                     </span>
-                    <div>
-                      <p className="font-semibold">{lesson.title}</p>
-                      <p className="text-xs opacity-70">{lesson.description}</p>
+                    <div className="min-w-0">
+                      <p className="font-semibold text-sm sm:text-base truncate">{lesson.title}</p>
+                      <p className="text-xs opacity-70 line-clamp-2">{lesson.description}</p>
                     </div>
                   </div>
                 </motion.button>
@@ -219,13 +219,13 @@ export default function CourseDetail() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex-1"
+            className="flex-1 min-w-0"
           >
-            <div className="bg-card border border-primary/30 rounded-xl p-8">
+            <div className="bg-card border border-primary/30 rounded-xl p-4 sm:p-6 lg:p-8">
               {/* Lesson Header */}
-              <div className="mb-8 pb-8 border-b border-primary/20">
-                <h2 className="text-4xl font-bold text-foreground mb-2">{selectedLesson.title}</h2>
-                <p className="text-foreground/60 text-lg">{selectedLesson.description}</p>
+              <div className="mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-primary/20">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2">{selectedLesson.title}</h2>
+                <p className="text-foreground/60 text-sm sm:text-lg">{selectedLesson.description}</p>
               </div>
 
               {/* Lesson Content */}
@@ -233,21 +233,21 @@ export default function CourseDetail() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className="prose prose-invert prose-lg max-w-none mb-12"
+                className="prose prose-invert prose-sm sm:prose-lg max-w-none mb-8 sm:mb-12"
               >
-                <div className="text-foreground/80 whitespace-pre-wrap leading-relaxed">
+                <div className="text-sm sm:text-base text-foreground/80 whitespace-pre-wrap leading-relaxed">
                   {selectedLesson.content}
                 </div>
               </motion.div>
 
               {/* Navigation Buttons */}
-              <div className="flex justify-between items-center pt-8 border-t border-primary/20">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-0 sm:justify-between sm:items-center pt-6 sm:pt-8 border-t border-primary/20">
                 <motion.button
                   onClick={handlePrevLesson}
                   disabled={!canGoPrev}
-                  whileHover={{ scale: canGoPrev ? 1.05 : 1 }}
-                  whileTap={{ scale: canGoPrev ? 0.95 : 1 }}
-                  className="px-6 py-3 bg-card border border-primary/30 text-foreground rounded-lg font-semibold disabled:opacity-40 disabled:cursor-not-allowed hover:border-primary/60 transition"
+                  whileHover={{ scale: canGoPrev ? 1.02 : 1 }}
+                  whileTap={{ scale: canGoPrev ? 0.98 : 1 }}
+                  className="order-2 sm:order-1 w-full sm:w-auto px-6 py-3 bg-card border border-primary/30 text-foreground text-sm sm:text-base rounded-lg font-semibold disabled:opacity-40 disabled:cursor-not-allowed hover:border-primary/60 transition"
                 >
                   Previous Lesson
                 </motion.button>
@@ -257,12 +257,12 @@ export default function CourseDetail() {
                     href={`/exercises?courseId=${courseId}&lessonId=${selectedLesson._id}${
                       completedLessonIds.has(selectedLesson._id) ? '&review=true' : ''
                     }`}
-                    className="px-6 py-3 bg-secondary text-secondary-foreground rounded-lg font-semibold hover:glow-border-magenta transition"
+                    className="order-1 sm:order-2 w-full sm:w-auto text-center px-6 py-3 bg-secondary text-secondary-foreground text-sm sm:text-base rounded-lg font-semibold hover:glow-border-magenta transition"
                   >
                     {completedLessonIds.has(selectedLesson._id) ? 'Review Exercises' : 'Start Exercises'}
                   </Link>
                 ) : (
-                  <span className="px-6 py-3 bg-background border border-primary/10 text-foreground/30 rounded-lg font-semibold cursor-not-allowed">
+                  <span className="order-1 sm:order-2 w-full sm:w-auto text-center px-6 py-3 bg-background border border-primary/10 text-foreground/30 text-sm sm:text-base rounded-lg font-semibold cursor-not-allowed">
                     🔒 Complete previous lesson first
                   </span>
                 )}
@@ -270,9 +270,9 @@ export default function CourseDetail() {
                 <motion.button
                   onClick={handleNextLesson}
                   disabled={!canGoNext}
-                  whileHover={{ scale: canGoNext ? 1.05 : 1 }}
-                  whileTap={{ scale: canGoNext ? 0.95 : 1 }}
-                  className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold disabled:opacity-40 disabled:cursor-not-allowed hover:glow-border-cyan transition"
+                  whileHover={{ scale: canGoNext ? 1.02 : 1 }}
+                  whileTap={{ scale: canGoNext ? 0.98 : 1 }}
+                  className="order-3 w-full sm:w-auto px-6 py-3 bg-primary text-primary-foreground text-sm sm:text-base rounded-lg font-semibold disabled:opacity-40 disabled:cursor-not-allowed hover:glow-border-cyan transition"
                 >
                   Next Lesson
                 </motion.button>

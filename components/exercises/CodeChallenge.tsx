@@ -10,7 +10,7 @@ const Editor = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="bg-card h-96 rounded-lg flex items-center justify-center text-foreground/60 border border-primary/20">
+      <div className="bg-card h-64 sm:h-96 rounded-lg flex items-center justify-center text-sm sm:text-base text-foreground/60 border border-primary/20">
         Loading editor...
       </div>
     ),
@@ -62,7 +62,6 @@ export default function CodeChallenge({
       setScore(res.data.score)
       setFeedback(res.data.feedback)
       setSubmitted(true)
-      // Real per-test-case results from the grading route — no simulation.
       setTestResults(res.data.results || [])
       onSubmit(res.data.score)
     } catch (error) {
@@ -78,37 +77,45 @@ export default function CodeChallenge({
   }
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="space-y-6">
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="space-y-4 sm:space-y-6">
       {/* Problem Description */}
-      <div className="bg-primary/5 border border-primary/30 rounded-lg p-6">
-        <h3 className="text-2xl font-bold text-foreground mb-2">{title}</h3>
-        <p className="text-foreground/70 whitespace-pre-wrap">{description}</p>
+      <div className="bg-primary/5 border border-primary/30 rounded-lg p-4 sm:p-6">
+        <h3 className="text-lg sm:text-2xl font-bold text-foreground mb-2">{title}</h3>
+        <p className="text-sm sm:text-base text-foreground/70 whitespace-pre-wrap">{description}</p>
       </div>
 
       {/* Editor */}
       <div className="space-y-3">
-        <h4 className="text-lg font-semibold text-foreground">Write Your Code</h4>
+        <h4 className="text-base sm:text-lg font-semibold text-foreground">Write Your Code</h4>
         <div className="rounded-lg overflow-hidden border border-primary/30">
           <Editor
-            height="400px"
+            height="280px"
             defaultLanguage="javascript"
             defaultValue={initialCode}
             onChange={handleEditorChange}
             theme="vs-dark"
             options={{
               minimap: { enabled: false },
-              fontSize: 14,
+              fontSize: 13,
               wordWrap: 'on',
               automaticLayout: true,
+              scrollBeyondLastLine: false,
             }}
           />
         </div>
+        <style jsx global>{`
+          @media (min-width: 640px) {
+            .monaco-editor-container {
+              height: 400px !important;
+            }
+          }
+        `}</style>
       </div>
 
       {/* Test Cases */}
       {testResults.length > 0 && submitted && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
-          <h4 className="text-lg font-semibold text-foreground mb-3">Test Results</h4>
+          <h4 className="text-base sm:text-lg font-semibold text-foreground mb-3">Test Results</h4>
           <div className="space-y-2">
             {testResults.map((result, index) => (
               <div
@@ -119,11 +126,11 @@ export default function CodeChallenge({
                     : 'bg-destructive/10 border-destructive'
                 }`}
               >
-                <div className="flex items-start gap-3">
-                  <span className={`text-lg font-bold ${result.passed ? 'text-accent' : 'text-destructive'}`}>
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <span className={`text-base sm:text-lg font-bold flex-shrink-0 ${result.passed ? 'text-accent' : 'text-destructive'}`}>
                     {result.passed ? '✓' : '✗'}
                   </span>
-                  <p className={`text-sm ${result.passed ? 'text-accent' : 'text-destructive'}`}>{result.message}</p>
+                  <p className={`text-xs sm:text-sm ${result.passed ? 'text-accent' : 'text-destructive'}`}>{result.message}</p>
                 </div>
               </div>
             ))}
@@ -143,28 +150,28 @@ export default function CodeChallenge({
           <p className={`text-sm font-semibold ${score >= 80 ? 'text-accent' : 'text-secondary'}`}>
             Score: {score}%
           </p>
-          <p className="text-sm mt-2 text-foreground/70">{feedback}</p>
+          <p className="text-xs sm:text-sm mt-2 text-foreground/70">{feedback}</p>
         </motion.div>
       )}
 
       {/* Actions */}
-      <div className="flex gap-3">
+      <div className="flex flex-col sm:flex-row gap-3">
         {!submitted ? (
           <>
             <motion.button
               onClick={handleReset}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex-1 py-3 bg-card border border-primary/30 text-foreground font-semibold rounded-lg hover:border-primary/60 transition"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex-1 py-3 bg-card border border-primary/30 text-foreground text-sm sm:text-base font-semibold rounded-lg hover:border-primary/60 transition"
             >
               Reset Code
             </motion.button>
             <motion.button
               onClick={handleSubmit}
               disabled={loading}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex-1 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:glow-border-cyan transition disabled:opacity-50"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex-1 py-3 bg-primary text-primary-foreground text-sm sm:text-base font-semibold rounded-lg hover:glow-border-cyan transition disabled:opacity-50"
             >
               {loading ? 'Submitting...' : 'Submit Code'}
             </motion.button>
@@ -174,9 +181,9 @@ export default function CodeChallenge({
             onClick={onNext}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-full py-3 bg-secondary text-secondary-foreground font-semibold rounded-lg hover:glow-border-magenta transition"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full py-3 bg-secondary text-secondary-foreground text-sm sm:text-base font-semibold rounded-lg hover:glow-border-magenta transition"
           >
             Next Exercise
           </motion.button>
